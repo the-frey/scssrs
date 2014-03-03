@@ -11,8 +11,31 @@
   <%= render '/layouts/shared/shiv' %>
 </head>
 <body>
+  <div class='container'>
 
-  <%= yield %>
+    <div class='row'>
+      <div class='col-md-4'><%= link_to image_tag('scssrs.png', class: 'img-responsive'), root_path %></div>
+      <div class='col-md-8'>
+        <nav class='main_nav'>
+          <%= link_to 'About', about_path, class: '' %>
+          <%= link_to 'Contact', contact_path, class: '' %>
+        </nav>
+      </div>
+    </div>
 
+    <div class='row'>
+      <div class='col-md-12'>
+        <%= yield %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-12'>
+        <footer>
+          <%= link_to 'View on GitHub', 'https://github.com/the-frey/scssrs' %>
+        </footer>
+      </div>      
+    </div>   
+  </div>
 </body>
 </html>
