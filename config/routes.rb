@@ -1,20 +1,20 @@
 Scssrs::Application.routes.draw do
-  get "decisions/index"
-
-  get "decisions/move"
-
-  get "static_pages/about"
-
-  get "static_pages/contact"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
+
+  # $ rake routes output as of 3-3-14
+
+  # about           /about(.:format)          static_pages#about
+  # contact         /contact(.:format)        static_pages#contact
+  # decisions_move  /decisions/move(.:format) decisions#move
+  # root            /                         decisions#index
 
   match '/about', to: 'static_pages#about'
 
   match '/contact', to: 'static_pages#contact'
 
-  match '/decision', to: 'decisions#move'
+  match '/decisions/move', to: 'decisions#move'
 
   root to: "decisions#index"
 
