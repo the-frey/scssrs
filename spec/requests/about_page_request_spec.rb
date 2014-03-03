@@ -6,7 +6,7 @@ describe "About page" do
   subject { page }
 
   describe "visiting the page" do
-    before { visit about_page_path }
+    before { visit about_path }
 
     it { should have_selector('h2', text: 'About scssrs') }
   end
