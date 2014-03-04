@@ -1,0 +1,67 @@
+function RochambeauMove(move){
+
+  var self = this;
+
+  this.move = move;
+
+  this.makeMove = function(){
+    var move = $.Deferred();
+    var url = '/decisions/move.json';
+    $.ajax({
+      url: url,
+      data: {move: self.move},
+      type: 'post',
+      dataType: 'json',
+      beforeSend: function(xhr){
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      },
+      success: function(response){
+        move.resolve(response);
+      },
+      error: function(message){
+        move.reject(response);
+      }
+    });
+    return move;
+  };
+
+  this.successfulMove = function(response){
+    console.log(JSON.stringify(response));
+  };
+
+  this.failedMove = function(message){
+    console.log(JSON.stringify(message));
+  };
+
+  this.won = function(){};
+
+  this.lost = function(){};
+
+};
+
+
+// Click handlers go within the jQ namespace
+$(document).ready(function(){
+
+  // Click handler for rock
+  $('.rock_button').on('click', function(e){
+    e.preventDefault();
+    var playRock = new RochambeauMove('rock');
+    playRock.makeMove().then(playRock.successfulMove, playRock.failedMove);
+  });
+
+  // Click handler for paper
+  $('.paper_button').on('click', function(e){
+    e.preventDefault();
+    var playPaper = new RochambeauMove('paper');
+    playPaper.makeMove().then(playPaper.successfulMove, playPaper.failedMove);
+  });
+
+  // Click handler for scissors
+  $('.scissors_button').on('click', function(e){
+    e.preventDefault();
+    var playScissors = new RochambeauMove('scissors');
+    playScissors.makeMove().then(playScissors.successfulMove, playScissors.failedMove);
+  });
+
+});

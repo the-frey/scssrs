@@ -25,6 +25,14 @@
 
     <div class='row'>
       <div class='col-md-12'>
+        <div id='flash_target'>
+          <% flash.each do |key, value| %>
+            <div class='alert <%= "alert alert-#{key}" %>'>
+              <%= value %>
+              <%= link_to raw("&times;"), '#', class: 'close' %>
+            </div>
+          <% end %>
+        </div>
         <%= yield %>
       </div>
     </div>

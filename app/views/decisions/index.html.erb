@@ -6,3 +6,7 @@
   <%= link_to 'paper', '#', class: 'btn btn-success btn-lg paper_button' %>
   <%= link_to 'scissors', '#', class: 'btn btn-warning btn-lg scissors_button' %>
 </div>
+
+<script type="text/javascript">
+  <%= render partial: '/layouts/shared/js/move_ajax', formats: [:js] %>
+</script>

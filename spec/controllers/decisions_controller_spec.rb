@@ -4,35 +4,35 @@ describe DecisionsController do
 
   context 'playing rock' do
     before do
-      post :move, format: :json, move_played: 'rock'
+      post :move, format: :json, move: 'rock'
     end
 
     subject { response }
 
     its(:status) { should be 200 }
-    its(:body) { should include 'You played rock.' }
+    its(:body) { should include 'rock' }
   end
 
   context 'playing paper' do
     before do
-      post :move, format: :json, move_played: 'paper'
+      post :move, format: :json, move: 'paper'
     end
 
     subject { response }
 
     its(:status) { should be 200 }
-    its(:body) { should include 'You played paper.' }
+    its(:body) { should include 'paper' }
   end
 
   context 'playing scissors' do
     before do
-      post :move, format: :json, move_played: 'scissors'
+      post :move, format: :json, move: 'scissors'
     end
 
     subject { response }
 
     its(:status) { should be 200 }
-    its(:body) { should include 'You played scissors.' }
+    its(:body) { should include 'scissors' }
   end
 
 end
