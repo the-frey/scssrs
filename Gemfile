@@ -31,6 +31,11 @@ group :test do
   gem 'database_cleaner', '~> 1.2.0'
 end
 
+group :production do
+  gem 'pg', '~> 0.17.0'
+  gem 'rails_12factor', "~> 0.0.2"
+end
+
 gem 'jquery-rails', '~> 3.0.4'
 gem "jquery-ui-rails", "~> 4.1.0"
 gem 'bootstrap-sass', '~> 3.1.1'
