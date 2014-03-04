@@ -11,5 +11,6 @@ If you get an error with cross dependencies for `Nokogiri` and `libxml2`, try un
 
 1. Test suite to cover main user flow
 2. Basic styles
-3. AJAX rock-paper-scissors
+3. AJAX rock-paper-scissors with random AI plays
 4. Data capture (plays and IP location, perhaps)
+5. Intelligent (or semi-intelligent) algo for AI player
