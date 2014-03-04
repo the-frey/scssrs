@@ -9,7 +9,7 @@ describe "Decisions [app index] page" do
 
     it { should have_selector('h2', text: 'Try scssrs now!') }
 
-    describe "playing rochambeau" do
+    describe "playing rochambeau", js: true do
       context 'playing rock' do
         before do
           page.find('.rock_button').click

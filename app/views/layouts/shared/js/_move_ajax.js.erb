@@ -26,16 +26,50 @@ function RochambeauMove(move){
   };
 
   this.successfulMove = function(response){
+    var result = response.tie ? 'tie.' : self.wonOrLost(response.won);
+    var flash_text = 'You played ' + response.player_move + '. The result was a ' + result;
+    self.setFlash(flash_text, 'success');
+    self.resetHideFlashBinding();
     console.log(JSON.stringify(response));
   };
 
   this.failedMove = function(message){
+    self.setFlash(message.responseText, 'error');
+    self.resetHideFlashBinding();
     console.log(JSON.stringify(message));
   };
 
-  this.won = function(){};
+  this.wonOrLost = function(json_input){
+    result = '';
+    if(json_input === true){
+      result = ' crushing defeat of our AI overlords!';
+      var playerScore = parseInt($('#results #player').html());
+      $('#results #player').html(playerScore + 1);
+    } else {
+      result = ' inevitable victory for Skynet.'
+      var AIScore = parseInt($('#results #ai').html());
+      $('#results #ai').html(AIScore + 1);
+    }
+    return result;
+  };
 
-  this.lost = function(){};
+  this.setFlash = function(flash_text, status){
+    if(status === 'success'){
+      var flash = $("<div class='alert alert-success'></div>");
+    } else {
+      var flash = $("<div class='alert alert-error'></div>");
+    }
+    flash.append(flash_text);
+    flash.append("<a href='#' class='close'>&times;</a>");
+    $('div#flash_target').html(flash);
+  };
+
+  this.resetHideFlashBinding = function(){
+    $('.alert .close').click(function(e){
+      e.preventDefault();
+      $('.alert').slideUp('fast');
+    });
+  };
 
 };
 

@@ -7,6 +7,11 @@
   <%= link_to 'scissors', '#', class: 'btn btn-warning btn-lg scissors_button' %>
 </div>
 
+<h4 id='results'>
+  Player: <span id='player'>0</span>
+  AI: <span id='ai'>0</span>
+</h4>
+
 <script type="text/javascript">
   <%= render partial: '/layouts/shared/js/move_ajax', formats: [:js] %>
 </script>
