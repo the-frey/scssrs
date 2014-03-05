@@ -52,7 +52,7 @@ end
 class WarningSuppressor
   class << self
     def write(message)
-      puts(message) unless (message =~ /QFont::setPixelSize: Pixel size <= 0/) or (message =~ /QNetworkReplyImplPrivate::error: Internal problem, this method must only be called once./)
+      puts(message) unless (message =~ /QFont::setPixelSize: Pixel size <= 0/) or (message =~ /QNetworkReplyImplPrivate::error: Internal problem, this method must only be called once./) or (message =~ /[deprecated] I18n.enforce_available_locales will default to true in the future. If you really want to skip validation of your locale you can set I18n.enforce_available_locales = false to avoid this message./)
       0
     end
   end
