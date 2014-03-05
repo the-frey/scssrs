@@ -3,19 +3,20 @@ class DecisionsController < ApplicationController
   end
 
   def move
-
-    @ip_address = request.remote_ip
-    @ai_move = generate_ai_move
+    
+    @ip_address = request.remote_ip 
     @player_move = parse_player_move(params[:move])
+    @decision = Decision.new(ip: @ip_address, player_choice: @player_move) unless @player_move.nil?
+    @ai_move = @decision.generate_ai_move
 
-    if @player_move.nil?
+    if !@decision.save
       render text: 'Invalid move', layout: false
     else
       respond_to do |format| 
         format.json do
-          @response = {ip_address: @ip_address, ai_move: @ai_move, player_move: params[:move]}
+          @response = {decision_id: @decision.id, ip_address: @ip_address, ai_move: @ai_move, player_move: params[:move]}
           @response[:tie] = true if @ai_move == @player_move
-          @response[:won] = calculate_winner(@ai_move, @player_move) unless @ai_move == @player_move
+          @response[:won] = @decision.calculate_winner(@ai_move, @player_move) unless @ai_move == @player_move
           render json: @response.to_json, layout: false
         end
       end
@@ -38,27 +39,4 @@ class DecisionsController < ApplicationController
       return number
     end
 
-    # Naive implementation that uses a random number generator
-    def generate_ai_move 
-      return rand(3)
-    end
-
-    # Given we aren't using a db/models yet, this goes here
-    def calculate_winner(ai_move, player_move)
-      @player_wins = nil
-      if ai_move == 0  && player_move == 1
-        @player_wins = true
-      elsif ai_move == 0  && player_move == 2
-        @player_wins = false
-      elsif ai_move == 1  && player_move == 0
-        @player_wins = false
-      elsif ai_move == 1  && player_move == 2
-        @player_wins = true
-      elsif ai_move == 2  && player_move == 0
-        @player_wins = true
-      elsif ai_move == 2  && player_move == 1
-        @player_wins = false
-      end
-      return @player_wins
-    end
 end

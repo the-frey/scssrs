@@ -32,4 +32,14 @@ describe Decision do
     it { should_not be_valid }
   end
 
+  describe "different plays can have the same ip" do
+    before do
+      @decision.save
+      @decision_two.save
+      @decision_three.save
+    end
+
+    specify { Decision.all.count.should == 3 }
+  end
+
 end

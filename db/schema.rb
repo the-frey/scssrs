@@ -11,13 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305173620) do
+ActiveRecord::Schema.define(:version => 20140305181047) do
 
   create_table "decisions", :force => true do |t|
     t.string "ip"
     t.string "player_choice"
   end
-
-  add_index "decisions", ["ip"], :name => "index_decisions_on_ip", :unique => true
 
 end
