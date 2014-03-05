@@ -11,6 +11,7 @@ describe DecisionsController do
 
     its(:status) { should be 200 }
     its(:body) { should include 'rock' }
+    specify { Decision.all.count.should be > 0 }
   end
 
   context 'playing paper' do
@@ -22,6 +23,7 @@ describe DecisionsController do
 
     its(:status) { should be 200 }
     its(:body) { should include 'paper' }
+    specify { Decision.all.count.should be > 0 }
   end
 
   context 'playing scissors' do
@@ -33,6 +35,7 @@ describe DecisionsController do
 
     its(:status) { should be 200 }
     its(:body) { should include 'scissors' }
+    specify { Decision.all.count.should be > 0 }
   end
 
 end
