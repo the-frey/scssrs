@@ -7,7 +7,7 @@ class DecisionsController < ApplicationController
     @ip_address = request.remote_ip 
     @player_move = parse_player_move(params[:move])
     @decision = Decision.new(ip: @ip_address, player_choice: @player_move) unless @player_move.nil?
-    @ai_move = @decision.generate_ai_move
+    @ai_move = @decision.generate_ai_move(@ip_address)
 
     if !@decision.save
       render text: 'Invalid move', layout: false

@@ -11,11 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305181047) do
+ActiveRecord::Schema.define(:version => 20140305183457) do
 
   create_table "decisions", :force => true do |t|
-    t.string "ip"
-    t.string "player_choice"
+    t.string   "ip"
+    t.string   "player_choice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
