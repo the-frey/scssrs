@@ -19,7 +19,7 @@ function RochambeauMove(move){
         move.resolve(response);
       },
       error: function(message){
-        move.reject(response);
+        move.reject(message);
       }
     });
     return move;
@@ -28,13 +28,14 @@ function RochambeauMove(move){
   this.successfulMove = function(response){
     var result = response.tie ? 'tie.' : self.wonOrLost(response.won);
     var flash_text = 'You played ' + response.player_move + '. The result was a ' + result;
-    self.setFlash(flash_text, 'success');
+    var won = (response.won && response.won == true) ? true : false;
+    self.setFlash(flash_text, 'success', won);
     self.resetHideFlashBinding();
     console.log(JSON.stringify(response));
   };
 
   this.failedMove = function(message){
-    self.setFlash(message.responseText, 'error');
+    self.setFlash(message.responseText, 'error', false);
     self.resetHideFlashBinding();
     console.log(JSON.stringify(message));
   };
@@ -53,9 +54,9 @@ function RochambeauMove(move){
     return result;
   };
 
-  this.setFlash = function(flash_text, status){
+  this.setFlash = function(flash_text, status, won){
     if(status === 'success'){
-      var flash = $("<div class='alert alert-success'></div>");
+      var flash = won ? $("<div class='alert alert-success'></div>") : $("<div class='alert alert-warning'></div>");
     } else {
       var flash = $("<div class='alert alert-error'></div>");
     }
